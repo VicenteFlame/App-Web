@@ -1,13 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Donacion</title>
+	<title>Agregar Donación</title>
+    <link rel="stylesheet" type="text/css" href="../css/agregar-donacion.css">
 </head>
 <body>
-    <h1>
-        hola
-    </h1>
+    <div class="main-container">
+
+        <form name="formContacto" method="post" enctype="multipart/form-data">
+            <h2> Informacion de Contacto</h2>
+            <label for="nombre">Nombre donante</label>
+            <input type="text" name="nombre" id="nombre" maxlength="80" required><br>
+
+            <label for="email">Email donante</label>
+            <input type="email" name="email" id="email" maxlength="30" required><br>
+
+            <label for="phone">Número celular donante</label>
+            <input type="text" name="phone" id="phone" maxlength="15" ><br>
+            
+            <label for="select-region">Región</label>
+            <select name="select-region" id="select-region" required>
+                <option value="">Seleccione región</option>
+            </select><br>
+
+            <label for="select-Comuna">Comuna</label>
+            <select name="select-Comuna" id="select-Comuna" required>
+                <option value="">Seleccione comuna</option>
+            </select><br>
+
+        </form>
+
+        <form name="formDispositivo" method="post" enctype="multipart/form-data">
+            <h2> Informacion dispositivo</h2>
+            <label for="nombreDispositivo">Nombre dispositivo</label>
+            <input type="text" name="nombreDispositivo" id="nombreDispositivo" maxlength="80" required><br>
+
+            <label for="descripcionDispositivo">Descripción del dispositivo</label>
+            <textarea type="text" id="descripcionDispositivo" name="descripcionDispositivo" rows="4" cols="50"></textarea>
+
+            <label for="tipo">Tipo</label>
+            <select name="tipo" id="tipo" maxlenght="3" required>
+                <option value="">Seleccione tipo</option>
+                <option value="Pantalla">Pantalla</option>
+                <option value="Notebook">Notebook</option>
+                <option value="Tablet">Tablet</option>
+                <option value="Celular">Celular</option>
+                <option value="Consola">Consola</option>
+                <option value="Mouse">Mouse</option>
+                <option value="Teclado">Teclado</option>
+                <option value="Impresora">Impresora</option>
+                <option value="Parlante">Parlante</option>
+                <option value="Audífonos">Audífonos</option>
+                <option value="Otro">Otro</option>
+            </select><br>
+            
+            <label for="añosUso">Años de uso</label>
+            <input type="text" name="añosUso" id="añosUso" maxlength="3" required><br>
+
+            <label for="estado">Estado funcionamiento </label>
+            <select name="estado" id="estado" required>
+                <option value="">Seleccione estado</option>
+                <option value="Funciona perfecto">Funciona perfecto</option>
+                <option value="Funciona a medias">Funciona a medias</option>
+                <option value="No funciona">No funciona</option>
+            </select><br>
+
+            <label for="files">Fotos dispositivo</label>
+            <input type="file" name="files" id="files" multiple accept="image/*,.pdf" required><br><br>
+
+            <div id="val-box" hidden>
+                <h2 id="val-msg"></h2>
+                <ul id="val-list"></ul>
+            </div>
+
+            <button id="submit-btn" type="button">Enviar</button>
+        </form>
+
+    </div>
+    <script src="../js/select.js"></script>
+    <script src="../js/agregar-donacion-validation.js"></script>
 </body>
 </html>
