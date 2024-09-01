@@ -73,21 +73,6 @@ const validateSelect = (select) => {
   
 const validateForm = () => {
     // obtener elementos del DOM usando el nombre del formulario.
-    let myForm = document.forms["formContacto"];
-    let name = myForm["nombre"].value;
-    let email = myForm["email"].value;
-    let phoneNumber = myForm["phone"].value;
-    let region = myForm["select-region"].value;
-    let comuna = myForm["select-Comuna"].value;
-
-    let myForm1 = document.forms["formDispositivo"];
-    let nameDispositivo = myForm1["nombreDispositivo"].value;
-    let descripcionDispositivo = myForm1["descripcionDispositivo"].value;
-    let tipo = myForm1["tipo"].value;
-    let añosUso = myForm1["añosUso"].value;
-    let estado = myForm1["estado"].value;    
-    let files = myForm1["files"].files;
-
   
     // variables auxiliares de validación y función.
     let invalidInputs = [];
@@ -98,38 +83,30 @@ const validateForm = () => {
     };
   
     // lógica de validación
-    if (!validateName(name)) {
-      setInvalidInput("Nombre donante");
-    }
-    if (!validateEmail(email)) {
-      setInvalidInput("Email donante ");
-    }
-    if (!validatePhoneNumber(phoneNumber)) {
-      setInvalidInput("Número celular donante");
-    }
-    if (!validateSelect(region)) {
-        setInvalidInput("Región");
-      }
-    if (!validateSelect(comuna)) {
-        setInvalidInput("Comuna");
-      }
-    
-    if (!validateNameDispositivo(nameDispositivo)) {
-        setInvalidInput("Nombre dispositivo");
-      }
-    if (!validateSelect(tipo)) {
-        setInvalidInput("Tipo");
-      }
-    if (!validateAñosUso(añosUso)) {
-        setInvalidInput("Años de uso");
-      }
-    if (!validateSelect(estado)) {
-        setInvalidInput("Estado funcionamiento");
-      }
+    document.querySelectorAll(".dispositivo-form").forEach(form => {
+        let nameDispositivo = form["nombreDispositivo"].value;
+        let tipo = form["tipo"].value;
+        let añosUso = form["añosUso"].value;
+        let estado = form["estado"].value;
+        let files = form["files"].files;
 
-    if (!validateFiles(files)) {
-      setInvalidInput("Fotos dispositivo");
-    }
+        // Reutilizamos las funciones de validación existentes
+        if (!validateNameDispositivo(nameDispositivo)) {
+            setInvalidInput("Nombre dispositivo");
+        }
+        if (!validateSelect(tipo)) {
+            setInvalidInput("Tipo");
+        }
+        if (!validateAñosUso(añosUso)) {
+            setInvalidInput("Años de uso");
+        }
+        if (!validateSelect(estado)) {
+            setInvalidInput("Estado funcionamiento");
+        }
+        if (!validateFiles(files)) {
+            setInvalidInput("Fotos dispositivo");
+        }
+    });
 
     // finalmente mostrar la validación
     let validationBox = document.getElementById("val-box");
@@ -154,46 +131,92 @@ const validateForm = () => {
   
       // hacer visible el mensaje de validación
       validationBox.hidden = false;
-    } else {
-      // Ocultar el formulario
-      myForm.style.display = "none";
-      myForm1.style.display = "none";
-  
-      // establecer mensaje de éxito
-      validationMessageElem.innerText = "¡Formulario válido! ¿Deseas enviarlo o volver?";
+    } 
+    else {
+    // Ocultar todo el contenido del formulario
+    Array.from(formContainer.children).forEach(child => {
+      if (child !== validationBox) {
+        child.style.display = "none";
+      }
+    });
+
+    // Establecer mensaje de confirmación
+    validationMessageElem.innerText = "¿Confirma que desea publicar esta donación?";
+    validationListElem.textContent = "";
+
+    // Aplicar estilos de éxito
+    validationBox.style.backgroundColor = "#ddffdd";
+    validationBox.style.borderLeftColor = "#4CAF50";
+
+    // Crear botones para confirmar o volver
+    let submitButton = document.createElement("button");
+    submitButton.innerText = "Sí, confirmo";
+    submitButton.style.marginRight = "10px";
+    submitButton.addEventListener("click", () => {
+      validationMessageElem.innerText = "Hemos recibido la información de su donación. Muchas gracias.";
       validationListElem.textContent = "";
-  
-      // aplicar estilos de éxito
-      validationBox.style.backgroundColor = "#ddffdd";
-      validationBox.style.borderLeftColor = "#4CAF50";
-  
-      // Agregar botones para enviar el formulario o volver
-      let submitButton = document.createElement("button");
-      submitButton.innerText = "Enviar";
-      submitButton.style.marginRight = "10px";
-      submitButton.addEventListener("click", () => {
-        // myForm.submit();
-        // no tenemos un backend al cual enviarle los datos
+      
+      let goHomeButton = document.createElement("button");
+      goHomeButton.innerText = "Volver al inicio";
+      goHomeButton.addEventListener("click", () => {
+        window.location.href = 'index.html';
       });
-  
-      let backButton = document.createElement("button");
-      backButton.innerText = "Volver";
-      backButton.addEventListener("click", () => {
-        // Mostrar el formulario nuevamente
-        myForm.style.display = "block";
-        myForm1.style.display = "block";
-        validationBox.hidden = true;
+      
+      validationListElem.innerHTML = ''; // Limpiar contenido anterior
+      validationListElem.appendChild(goHomeButton);
+    });
+
+    let backButton = document.createElement("button");
+    backButton.innerText = "No, quiero volver al formulario";
+    backButton.addEventListener("click", () => {
+      // Mostrar nuevamente todo el contenido del formulario
+      Array.from(formContainer.children).forEach(child => {
+        child.style.display = "";
       });
+      validationBox.hidden = true;
+    });
+
+    validationListElem.innerHTML = ''; // Limpiar contenido anterior
+    validationListElem.appendChild(submitButton);
+    validationListElem.appendChild(backButton);
+
+    // Hacer visible el mensaje de validación
+    validationBox.hidden = false;
+  }
+};
   
-      validationListElem.appendChild(submitButton);
-      validationListElem.appendChild(backButton);
   
-      // hacer visible el mensaje de validación
-      validationBox.hidden = false;
-    }
-  };
-  
-  
-  let submitBtn = document.getElementById("submit-btn");
-  submitBtn.addEventListener("click", validateForm);
+document.getElementById("add-device-btn").addEventListener("click", () => {
+    const dispositivoForms = document.querySelectorAll(".dispositivo-form");
+    const lastDispositivoForm = dispositivoForms[dispositivoForms.length - 1];
+    const newForm = lastDispositivoForm.cloneNode(true); // Clonamos el último formulario
+
+    // Restablecemos los valores del formulario clonado
+    newForm.querySelectorAll("input, select, textarea").forEach(input => {
+        input.value = ""; // Limpia los campos de texto y selects
+        if (input.type === "file") {
+            input.value = ""; // Resetea los campos de archivo
+        }
+    });
+
+    // Actualizar los IDs para evitar duplicación de IDs
+    newForm.querySelectorAll("[id]").forEach(input => {
+        const newId = input.id.split("-")[0] + "-" + (dispositivoForms.length + 1); 
+        input.id = newId; // Asigna un ID único al nuevo formulario
+    });
+
+    // Añadir el nuevo formulario al DOM después del último formulario existente
+    lastDispositivoForm.parentNode.insertBefore(newForm, lastDispositivoForm.nextSibling);
+
+    // Volver a enlazar el evento de "Agregar otro dispositivo" al nuevo botón en el formulario clonado
+    newForm.querySelector("#add-device-btn").addEventListener("click", (event) => {
+        event.preventDefault(); // Prevenir el comportamiento por defecto del botón
+        document.getElementById("add-device-btn").click();
+    });
+});
+
+
+
+let submitBtn = document.getElementById("submit-btn");
+submitBtn.addEventListener("click", validateForm);
   

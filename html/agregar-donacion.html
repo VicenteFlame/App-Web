@@ -6,17 +6,21 @@
 </head>
 <body>
     <div class="main-container">
+        <div id="val-box" hidden>
+            <h2 id="val-msg"></h2>
+            <ul id="val-list"></ul>
+        </div>
 
         <form name="formContacto" method="post" enctype="multipart/form-data">
             <h2> Informacion de Contacto</h2>
             <label for="nombre">Nombre donante</label>
-            <input type="text" name="nombre" id="nombre" maxlength="80" required><br>
+            <input type="text" name="nombre" id="nombre" size="80" required><br>
 
             <label for="email">Email donante</label>
-            <input type="email" name="email" id="email" maxlength="30" required><br>
+            <input type="email" name="email" id="email" size="30" required><br>
 
             <label for="phone">Número celular donante</label>
-            <input type="text" name="phone" id="phone" maxlength="15" ><br>
+            <input type="text" name="phone" id="phone" size="15" ><br>
             
             <label for="select-region">Región</label>
             <select name="select-region" id="select-region" required>
@@ -30,16 +34,16 @@
 
         </form>
 
-        <form name="formDispositivo" method="post" enctype="multipart/form-data">
-            <h2> Informacion dispositivo</h2>
+        <form name="formDispositivo" method="post" enctype="multipart/form-data" class="dispositivo-form">
+            <h3> Informacion dispositivo</h3>
             <label for="nombreDispositivo">Nombre dispositivo</label>
-            <input type="text" name="nombreDispositivo" id="nombreDispositivo" maxlength="80" required><br>
+            <input type="text" name="nombreDispositivo" id="nombreDispositivo" size="80" required><br>
 
             <label for="descripcionDispositivo">Descripción del dispositivo</label>
             <textarea type="text" id="descripcionDispositivo" name="descripcionDispositivo" rows="4" cols="50"></textarea>
 
             <label for="tipo">Tipo</label>
-            <select name="tipo" id="tipo" maxlenght="3" required>
+            <select name="tipo" id="tipo"  required>
                 <option value="">Seleccione tipo</option>
                 <option value="Pantalla">Pantalla</option>
                 <option value="Notebook">Notebook</option>
@@ -55,7 +59,7 @@
             </select><br>
             
             <label for="añosUso">Años de uso</label>
-            <input type="text" name="añosUso" id="añosUso" maxlength="3" required><br>
+            <input type="text" name="añosUso" id="añosUso" size="3" required><br>
 
             <label for="estado">Estado funcionamiento </label>
             <select name="estado" id="estado" required>
@@ -66,16 +70,12 @@
             </select><br>
 
             <label for="files">Fotos dispositivo</label>
-            <input type="file" name="files" id="files" multiple accept="image/*,.pdf" required><br><br>
+            <input type="file" name="files" id="files" multiple accept="image/*,.pdf" required><br>
+            
 
-            <div id="val-box" hidden>
-                <h2 id="val-msg"></h2>
-                <ul id="val-list"></ul>
-            </div>
-
-            <button id="submit-btn" type="button">Enviar</button>
         </form>
-
+        <button id="add-device-btn" type="button">Agregar otro dispositivo a esta donación</button>
+        <button id="submit-btn" type="button">Enviar</button>
     </div>
     <script src="../js/select.js"></script>
     <script src="../js/agregar-donacion-validation.js"></script>
