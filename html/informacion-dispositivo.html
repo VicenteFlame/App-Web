@@ -8,13 +8,13 @@
 </head>
 <body>
     <div class="main-container">
-
-        <h1> Informacion de Contacto</h1>
+        <button type="button" id="home-btn" class="home-btn">Inicio</button>
+        <h1>Informacion de Contacto</h1>
             <h3>Nombre donante</h3>
-            <p>Javiera Muñoz</p>
+            <p>Eva Muñoz</p>
             
             <h3>Email</h3>
-            <p>javitagamer@gmail.com </p>
+            <p>evagamer777@gmail.com </p>
 
             <h3>Número celular</h3>
             <p>956173418</p>
@@ -22,25 +22,63 @@
             <h3>Comuna, Región</h3>
             <p>Peñalolen, Región Metropolitana de Santiago</p>
 
-        <h1> Informacion del Dispositivo</h1>
+        <h1>Informacion del Dispositivo</h1>
             <h3>Nombre dispositivo</h3>
-            <p>Playstation 1</p>
+            <p>iPhone 14 Azul Marino</p>
             
             <h3>Descripción</h3>
-            <p>Estoy donando una PlayStation 1 que ya no funciona, pero que aún puede ser útil para alguien. 
-                Aunque actualmente no enciende, podría ser una buena oportunidad para quienes disfrutan reparando consolas 
-                antiguas o necesitan piezas de repuesto para otras consolas de la misma generación. Quizás con un poco de trabajo, 
-                vuelva a funcionar, o tal vez se pueda reutilizar alguno de sus componentes. 
-                ¡Espero que pueda encontrar una nueva vida en tus manos!</p>
+            <p>Estoy donando este iPhone 14 de color azul oscuro. Esta en perfecto estado pero lo dono porque
+                tengo una adiccion con Tiktok, me paso todo el día viendo videos en esa aplicación y dejo mis
+                responsabilidades de lado, lamentablemente esto ya se está volviendo un problema. Espero que donar 
+                este dispositivo me ayude a superar mi adicción y que otra persona le dé un mejor uso. Saludos
+            </p>
 
             <h3>Tipo</h3>
-            <p>Consola</p>
+            <p>Celular</p>
 
             <h3>Estado</h3>
-            <p>No funciona</p>
+            <p>Funciona perfecto</p>
 
             <h3>Fotos</h3>
-            <img src="../images/play1.jpg" alt="Image" class="zoomable-image">
+            <img src="../images/iPhone14.jpg" alt="Image" class="zoomable-image">
+
+
+        <h1>Comentarios</h1>
+        <div id="conf-list">
+            <div class="conf-container">
+                <div class="conf-author">
+                    <p>Vicente</p> 
+                    <p class="conf-date">22/08/24</p> 
+                </div>
+                <p>Hola, me interesa. De casualidad sabes de cuantos GB es??.</p>
+            </div>
+            <div class="conf-container">
+                <div class="conf-author">
+                    <p>Javiera</p> 
+                    <p class="conf-date">20/08/24</p> 
+                </div>
+                <p>Holaa no necesito un celu nuevo en estos momentos pero te quería mandar fuerzas y ojala superes tu adicción. 
+                    Saludos:3</p> 
+            </div>
+
+
+        </div>
+            
+            <div class="conf-user">
+                <h2>Agregar un comentario</h2>
+                <form id="conf-form" action="" method="post">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" required> <br>
+                    <label for="conf-text-area">Comentario</label>
+                    <textarea name="comentario" id="conf-text-area" cols="50" rows="4"></textarea>
+                    <div id="val-box" hidden>
+                        <h2 id="val-msg"></h2>
+                        <ul id="val-list"></ul>
+                    </div>
+            
+                    <button type="button" id="submit-conf-btn">Agregar comentario</button>
+                </form>
+                </div>
     <script lang="javascript" src="../js/informacion-dispositivo.js"></script>
 </body>
 </html>

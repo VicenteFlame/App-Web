@@ -36,7 +36,7 @@ body {
     width: 100%;
     border: none;
     border-radius: 5px;
-    background-color: #4CAF50;
+    background-color: #009879;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -52,5 +52,5 @@ body {
 }
 
 .botones button:hover {
-    background-color: #45a049; /* Color más oscuro al pasar sobre el botón */
+    background-color: #007d63; /* Color más oscuro al pasar sobre el botón */
 }
